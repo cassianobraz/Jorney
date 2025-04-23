@@ -4,8 +4,15 @@ namespace Journey.Exception.ExceptionsBase;
 
 public class ErrorOnValidationException : JourneyException
 {
-    public ErrorOnValidationException(string messsage) : base(messsage)
+    private readonly IList<string> _errors;
+    public ErrorOnValidationException(IList<string> messsages) : base(string.Empty)
     {
+        _errors = messsages;
+    }
+
+    public override IList<string> GetErrorMessages()
+    {
+        return _errors;
     }
 
     public override HttpStatusCode GetStatusCode()
